@@ -19,7 +19,6 @@ public class PaymentGatewayTests {
     }
 
 //    Can process a successful payment (with mocks)
-
     @Test
     void canProcessSuccessfulPayment() {
         assertTrue(paymentGateway.processPayment(123));
