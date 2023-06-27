@@ -10,6 +10,13 @@ public class PaymentGateway {
     }
 
     public boolean processPayment(int dollars) {
-        return false;
+        boolean result = processor.makePayment(dollars);
+        return result;
     }
+
+    public boolean findOrder(String orderNumber) {
+        boolean result = repository.getOrder(orderNumber);
+        return result;
+    }
+
 }
