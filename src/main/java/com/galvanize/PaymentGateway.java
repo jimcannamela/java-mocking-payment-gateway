@@ -10,13 +10,17 @@ public class PaymentGateway {
     }
 
     public boolean processPayment(String orderNumber) {
-        Double amount = repository.getOrderAmount(orderNumber);
+        Double amount;
+        try {
+            amount = repository.getOrderAmount(orderNumber);
+        } catch (RuntimeException e) {
+            return false;
+        }
         return processor.makePayment(orderNumber, amount);
     }
 
     public boolean findOrder(String orderNumber) {
-        boolean result = repository.getOrder(orderNumber);
-        return result;
+        return repository.getOrder(orderNumber);
     }
 
 }

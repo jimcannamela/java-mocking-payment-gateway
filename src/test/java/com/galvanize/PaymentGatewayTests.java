@@ -52,10 +52,14 @@ public class PaymentGatewayTests {
     @Test
     void handleOrderNotFound() {
         when(orderRepository.getOrder("OU812")).thenReturn(false);
-        boolean result = paymentGateway.findOrder("OU812");
-        assertFalse(result);
+        assertFalse(paymentGateway.findOrder("OU812"));
         verify(orderRepository, atLeast(1)).getOrder("OU812");
     }
     //    Verify the interactions and assertions
-
+    @Test
+    void orderNotFound() {
+        doThrow(new RuntimeException()).when(orderRepository).getOrderAmount("123");
+        assertFalse(paymentGateway.processPayment("123"));
+        verifyNoInteractions(paymentProcessor);
+    }
 }
