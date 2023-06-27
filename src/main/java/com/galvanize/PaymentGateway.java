@@ -9,9 +9,9 @@ public class PaymentGateway {
         this.repository = repository;
     }
 
-    public boolean processPayment(int dollars) {
-        boolean result = processor.makePayment(dollars);
-        return result;
+    public boolean processPayment(String orderNumber) {
+        Double amount = repository.getOrderAmount(orderNumber);
+        return processor.makePayment(orderNumber, amount);
     }
 
     public boolean findOrder(String orderNumber) {

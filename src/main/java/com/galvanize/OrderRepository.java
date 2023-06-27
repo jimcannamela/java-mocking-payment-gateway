@@ -1,7 +1,6 @@
 package com.galvanize;
 
 public interface OrderRepository {
-	default boolean getOrder(String orderNumber) {
-		return true;
-	}
+	boolean getOrder(String orderNumber);
+	Double getOrderAmount(String orderNumber);
 }
